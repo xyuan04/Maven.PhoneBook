@@ -1,11 +1,8 @@
 package com.zipcodewilmington.phonebook;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 //import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
 
 /**
  * Created by leon on 1/23/18.
@@ -13,42 +10,57 @@ import java.util.Map;
  */
 public class PhoneBook {
 
-    private final Map<String, List<String>> phonebook;
+    private final Map<String, List<String>> phonebook = new HashMap<>();
 
     public PhoneBook(Map<String, List<String>> map) {
-        this.phonebook = null;
+        this.phonebook.putAll(map);
     }
 
     public PhoneBook() {
-        this(null);
     }
 
     public void add(String name, String phoneNumber) {
+        phonebook.put(name, Arrays.asList(phoneNumber));
     }
 
     public void addAll(String name, String... phoneNumbers) {
+        phonebook.put(name, Arrays.asList(phoneNumbers));
     }
 
     public void remove(String name) {
+        phonebook.remove(name);
     }
 
     public Boolean hasEntry(String name) {
-        return null;
+        return phonebook.containsKey(name);
+    }
+
+    public Boolean hasEntry(String name, String phoneNumber) {
+        return phonebook.containsKey(name);
     }
 
     public List<String> lookup(String name) {
-        return null;
+        return phonebook.get(name);
     }
 
     public String reverseLookup(String phoneNumber)  {
-        return null;
+        String person = "";
+        for(String name : phonebook.keySet()) {
+            if(phonebook.get(name).contains(phoneNumber)) {
+                person = name;
+            }
+        }
+        return person;
     }
 
     public List<String> getAllContactNames() {
-        return null;
+        List<String> keyNames = new ArrayList<>();
+        keyNames.addAll(phonebook.keySet());
+        Collections.sort(keyNames);
+        return keyNames;
     }
 
     public Map<String, List<String>> getMap() {
-        return null;
+        return phonebook;
     }
 }
