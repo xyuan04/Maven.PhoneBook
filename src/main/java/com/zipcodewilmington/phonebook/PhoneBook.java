@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class PhoneBook {
 
-    private final Map<String, List<String>> phonebook = new HashMap<>();
+    private final Map<String, List<String>> phonebook = new LinkedHashMap<>();
 
     public PhoneBook(Map<String, List<String>> map) {
         this.phonebook.putAll(map);
@@ -56,7 +56,6 @@ public class PhoneBook {
     public List<String> getAllContactNames() {
         List<String> keyNames = new ArrayList<>();
         keyNames.addAll(phonebook.keySet());
-        Collections.sort(keyNames);
         return keyNames;
     }
 
